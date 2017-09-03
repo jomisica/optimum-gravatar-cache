@@ -95,7 +95,9 @@ class OGC
     public function schedules($schedules)
     {
         $schedules["OGC_job"] = array(
-            'interval' => $this->searchCache*60*60,
+            'interval' => 60,
+            // 'interval' => $this->searchCache*60*60,
+
             'display' => __('OGC job'));
         return $schedules;
     }
@@ -703,7 +705,7 @@ class OGC
     {
         $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $size > 0 ? floor(log($size, 1024)) : 0;
-        return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+        return number_format_i18n($size / pow(1024, $power), 2) . ' ' . $units[$power];
     }
 
     public function clientScripts()
