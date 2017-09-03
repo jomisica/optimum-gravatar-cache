@@ -11,7 +11,10 @@ The plugin intends the following:
 
 These are for now the strengths.
 
+## Settings
+
+![Settings ScreenShot](media/settings-page.png?raw=true "Settings ScreenShot")
+
 
 ## Problem/BUGS report:
 If you find any bugs or problems just mail me José Miguel Silva Caldeira <miguel@ncdc.pt>
-
