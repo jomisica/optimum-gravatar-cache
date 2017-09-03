@@ -21,8 +21,7 @@ Below we can see the ScreenShot that shows the difference of files loaded using 
 
 ![Differences using and not using the plugin](media/compare.png?raw=true "Differences using and not using the plugin")
 
-This test was done in a real article of my blog, they can confirm by yourselves in the following link.
-https://www.ncdc.pt/2014/11/07/como-ter-acesso-total-ao-router-technicolor-tg784n-v3-da-meo/
+This test was done in an actual article of my blog, you can confirm by yourselves in the following. linkhttps://www.ncdc.pt/2014/11/07/como-ter-acesso-total-ao-router-technicolor-tg784n-v3-da-meo/
 
 ## Problem/BUGS report:
 If you find any bugs or problems just mail me José Miguel Silva Caldeira <miguel@ncdc.pt>
