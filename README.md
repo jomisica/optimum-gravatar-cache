@@ -11,6 +11,8 @@ The plugin intends the following:
 
 These are for now the strengths.
 
+The plugin is able to use the WordPress gravatars as well as the BuddyPress plugin gravatars.
+
 ## Installation
 Currently the plugin is not found in wordpress repositories.
 In order to install it you can use one of the following method or another that meets your needs.
