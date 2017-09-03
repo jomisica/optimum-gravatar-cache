@@ -1,3 +1,9 @@
+<?php
+// Exit if accessed directly
+if (! defined('ABSPATH')) {
+    exit;
+}
+?>
 <div class="wrap gravatar-cache">
     <div id="icon-options-general" class="icon32"></div>
     <h2><?php _e($this->pluginName); ?></h2>
