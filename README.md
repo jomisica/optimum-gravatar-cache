@@ -11,6 +11,27 @@ The plugin intends the following:
 
 These are for now the strengths.
 
+## Installation
+Currently the plugin is not found in wordpress repositories.
+In order to install it you can use one of the following method or another that meets your needs.
+
+### Clone the project
+You can clone the repository to the wordpress plugins directory.
+
+```Bash
+$ cd /to/your/wordpress/plugin/directory
+$ git clone https://github.com/jomisica/optimum-gravatar-cache.git
+```
+
+### Through ZIP file
+
+```Bash
+$ cd /to/your/wordpress/plugin/directory
+$ wget https://github.com/jomisica/optimum-gravatar-cache/archive/master.zip
+$ unzip master.zip
+$ rm master.zip
+```
+
 ## Settings
 Below we can see the ScreenShot of the plugin configuration page.
 
