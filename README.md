@@ -12,6 +12,7 @@ The plugin intends the following:
 These are for now the strengths.
 
 ## Settings
+Below we can see the ScreenShot of the plugin configuration page.
 
 ![Settings ScreenShot](media/settings-page.png?raw=true "Settings ScreenShot")
 
