@@ -1,0 +1,15 @@
+.wrap.gravatar-cache{
+    max-width: 100%;
+}
+
+.wrap.gravatar-cache .gravatar-cache-form {
+	margin-right: 20px;
+}
+
+.wrap.gravatar-cache .postbox-container h3{
+	font-size: 15px;
+	font-weight: normal;
+	padding: 7px 10px;
+	margin: 0;
+	line-height: 1;
+}
