@@ -26,7 +26,7 @@ Any improvements that can be made through plugins will have consequences, good a
 * This plugin tries to minimize the number of files needed to display the same gravatar. This way the total time to load all the files is smaller.
 * All images of gravatars are optimized internally by reducing their size but yet showing the same information. This will also help in the total time required to load all files.
 * File names are reduced through base conversion, again with the idea of ​​saving a few more bytes.
-* It is possible to choose between the extension of the gravatars by default, being possible (jpg / png / gif). In this way adapting to the needs of each one. Because each of these file types have their advantages and disadvantages.
+* It is possible to customize the avatar by default are supported images of type (.SVG, .PNG, JPG, GIF). Allowing you to adjust to the needs of each site.
 * It is possible to considerably reduce the processing of either this plugin or all of them using a general wordpress cache. Such as WP Super Cache.
 * Optimization is done in the background, allowing the user to better control the resources spent on image optimization.
 * Updating the gravatars is also done in the background again allowing some control on the part of the user.
