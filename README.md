@@ -15,8 +15,8 @@ The plugin is able to use the WordPress gravatars as well as the BuddyPress plug
 
 ## Dependencies
 This plugin depends on the following modules:
-php-gd
-php-curl
+* php-gd
+* php-curl
 
 ## Pros and Cons
 Whoever develops in general and for Wordpress in question knows that this one consumes quite a few resources.
