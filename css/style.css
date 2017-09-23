@@ -1,15 +1,12 @@
-.wrap.gravatar-cache{
-    max-width: 100%;
+div.wrap{
+  overflow: auto !important;
 }
 
-.wrap.gravatar-cache .gravatar-cache-form {
-	margin-right: 20px;
+table.widefat th.column-primary{
+  font-weight: bold;
+  vertical-align: middle;
 }
-
-.wrap.gravatar-cache .postbox-container h3{
-	font-size: 15px;
-	font-weight: normal;
-	padding: 7px 10px;
-	margin: 0;
-	line-height: 1;
+table.widefat td.description{
+   white-space: normal;
+     vertical-align: middle;
 }

@@ -54,9 +54,15 @@ $ rm master.zip
 ```
 
 ## Settings
-Below we can see the ScreenShot of the plugin configuration page.
+Below we can see the plugin configuration pages.
 
-![Settings ScreenShot](media/settings-page.png?raw=true "Settings ScreenShot")
+![Settings ScreenShot](media/cache.png?raw=true "Settings ScreenShot")
+
+![Settings ScreenShot](media/default-avatar.png?raw=true "Settings ScreenShot")
+
+![Settings ScreenShot](media/optimization.png?raw=true "Settings ScreenShot")
+
+![Settings ScreenShot](media/stats.png?raw=true "Settings ScreenShot")
 
 ## Differences using and not using the plugin
 Below we can see the ScreenShot that shows the difference of files loaded using the plugin and when it is not being used.
