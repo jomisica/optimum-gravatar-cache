@@ -2,7 +2,7 @@
 /*
 Plugin Name: Optimum Gravatar Cache
 Author: José Miguel Silva Caldeira
-Version: 0.9.0
+Version: 0.0.1
 Description: It cache the gravatars locally, reducing the total number of requests per post. This will speed up the loading of the site and consequently improve the user experience.
 Author URI: https://www.ncdc.pt/members/admin
 Text Domain: OGC
@@ -329,6 +329,22 @@ class OGC
                 );
                 $error=true;
             }
+            if (!mkdir(ABSPATH."{$this->cacheDirectory}tmp", 0755, true) && !is_dir(ABSPATH."{$this->cacheDirectory}tmp")) {
+                $this->errorMessages[]=array(
+                  "type" => "error notice",
+                  "message" => __("Could not create cache directory '%s'. Please set read/write/execute (755) permissions for '%s' and/or correct owner.", 'OGC'),
+                  "args"=>array(ABSPATH."{$this->cacheDirectory}tmp",dirname(ABSPATH."{$this->cacheDirectory}tmp"))
+                );
+                $error=true;
+            }
+            if ((!is_writable(ABSPATH."{$this->cacheDirectory}tmp") || !is_executable(ABSPATH."{$this->cacheDirectory}tmp")) && !chmod(ABSPATH."{$this->cacheDirectory}tmp", 0755)) {
+                $this->errorMessages[]=array(
+                  "type" => "error notice",
+                  "message" => __("Please set read/write/execute (755) permissions for '%s' and/or correct owner.", 'OGC'),
+                  "args"=>array(ABSPATH."{$this->cacheDirectory}tmp")
+                );
+                $error=true;
+            }
         }
         return $error;
     }
@@ -374,6 +390,15 @@ class OGC
             return false;
         }
         if (!is_executable(ABSPATH.$this->cacheDirectory)) {
+            return false;
+        }
+        if (!is_dir(ABSPATH."{$this->cacheDirectory}tmp")) {
+            return false;
+        }
+        if (!is_writable(ABSPATH."{$this->cacheDirectory}tmp")) {
+            return false;
+        }
+        if (!is_executable(ABSPATH."{$this->cacheDirectory}tmp")) {
             return false;
         }
         return true;
