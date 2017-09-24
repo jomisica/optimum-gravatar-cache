@@ -145,7 +145,7 @@ class OGC
             unlink($filename);
         }
 
-        $wpdb->query("DELETE FROM `{$this->cacheTableName}` WHERE def=1");
+        $wpdb->query("DELETE FROM `{$this->cacheTableName}` WHERE def='1'");
     }
 
     protected function updateOptions()
@@ -446,14 +446,16 @@ class OGC
         $wpdb->query("CREATE TABLE IF NOT EXISTS `{$this->cacheTableName}` (
 				  `id` int(11) NOT NULL auto_increment,
 				  `email` varchar(255) NOT NULL,
-				  `hash` varchar(45) NOT NULL,
-				  `optimized` tinyint(1) NOT NULL,
+				  `hash` char(32) NOT NULL,
+				  `optimized` ENUM('0','1') NOT NULL,
 				  `size` int(5) NOT NULL,
-				  `ext` varchar(5) NOT NULL,
+				  `ext` enum('svg','jpg','png','gif') NOT NULL,
 				  `lastCheck` int(11) NOT NULL,
 				  `lastModified` int(11) NOT NULL,
-				  `def` tinyint(1) NOT NULL,
-				  PRIMARY KEY  (`id`)
+				  `def` ENUM('0','1') NOT NULL,
+          ADD PRIMARY KEY (`id`),
+          ADD KEY `hash` (`hash`),
+          ADD KEY `size` (`size`)
 				)");
 
         $resolved=get_option('OGC_resolved');
@@ -576,7 +578,7 @@ class OGC
                 rename(ABSPATH."{$this->cacheDirectory}tmp/{$hash}-{$size->size}x{$size->size}.{$newGravatar->ext}", ABSPATH."{$this->cacheDirectory}{$avatarId}.{$newGravatar->ext}");
             }
             $lastCheck = time();
-            $wpdb->query("UPDATE `{$this->cacheTableName}` SET `optimized`=0, `lastCheck`={$lastCheck}, `def`=0, `ext`='{$newGravatar->ext}', `lastModified`={$newGravatar->lastModified} WHERE `hash`='{$hash}'");
+            $wpdb->query("UPDATE `{$this->cacheTableName}` SET `optimized`='0', `lastCheck`={$lastCheck}, `def`='0', `ext`='{$newGravatar->ext}', `lastModified`={$newGravatar->lastModified} WHERE `hash`='{$hash}'");
             return true;
         }
         return false;
@@ -603,7 +605,7 @@ class OGC
                     $wpdb->query("UPDATE `{$this->cacheTableName}` SET `lastCheck`={$lastCheck} WHERE `hash`='{$user->hash}'");
                     continue;
                 } elseif ($gravatarStatus->status == 404 && $user->def == 0) {
-                    $wpdb->query("UPDATE `{$this->cacheTableName}` SET `optimized`=0, `lastCheck`={$lastCheck}, `def`=1, `ext`='{$this->customAvatarExt}', `lastModified`=0 WHERE `hash`='{$user->hash}'");
+                    $wpdb->query("UPDATE `{$this->cacheTableName}` SET `optimized`='0', `lastCheck`={$lastCheck}, `def`='1', `ext`='{$this->customAvatarExt}', `lastModified`=0 WHERE `hash`='{$user->hash}'");
                     continue;
                 } elseif ($gravatarStatus->status == 200 && $user->def == 0) {
                     if ($user->lastModified == $gravatarStatus->lastModified) {
@@ -677,7 +679,7 @@ class OGC
     public function optimizeCache()
     {
         global $wpdb;
-        $sql = "SELECT `id`, `size`, `ext`  FROM `{$this->cacheTableName}` WHERE (optimized=0 AND def=0) ORDER BY id LIMIT {$this->maxUpdateEachTime}";
+        $sql = "SELECT `id`, `size`, `ext`  FROM `{$this->cacheTableName}` WHERE (optimized='0' AND def='0') ORDER BY id LIMIT {$this->maxUpdateEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
         if ($results) {
             foreach ($results as $gravatar) {
@@ -691,7 +693,7 @@ class OGC
                     $optimizedGravatar=$this->getOptimizedGravatar($optimizedGravatarRequest->optimizedURL);
                     if ($optimizedGravatar->status == 200) {
                         if (file_put_contents(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}", $optimizedGravatar->content)) {
-                            $wpdb->query("UPDATE `{$this->cacheTableName}` SET optimized=1 WHERE id={$gravatar->id}");
+                            $wpdb->query("UPDATE `{$this->cacheTableName}` SET optimized='1' WHERE id={$gravatar->id}");
                         }
                     }
                 }
@@ -699,10 +701,10 @@ class OGC
         }
     }
 
-    protected function getIdByEmail($email, $size)
+    protected function getIdByHashAndSize($hash, $size)
     {
         global $wpdb;
-        $sql = "SELECT `id` FROM `{$this->cacheTableName}` where email='{$email}' AND size={$size}";
+        $sql = "SELECT `id` FROM `{$this->cacheTableName}` where hash='{$hash}' AND size={$size}";
         $results = $wpdb->get_results($sql, OBJECT);
         if ($results[0] -> id) {
             return $results[0] -> id;
@@ -852,7 +854,10 @@ class OGC
         }
         $this->updateResolved();
         $email=strtolower(trim($email));
-        $sql = $wpdb->prepare("SELECT `id`, `hash`,`ext`,`def` FROM `{$this->cacheTableName}` WHERE `email` = %s AND `size` = %d LIMIT 1", $email, $size);
+        $lastCheck = time();
+        $mailHash=md5($email);
+
+        $sql = $wpdb->prepare("SELECT `id`, `hash`,`ext`,`def` FROM `{$this->cacheTableName}` WHERE `hash` = %s AND `size` = %d LIMIT 1", $mailHash, $size);
         $results = $wpdb->get_results($sql, OBJECT);
 
         if ($results[0] -> id) {
@@ -881,8 +886,7 @@ class OGC
             }
         }
 
-        $lastCheck = time();
-        $mailHash=md5($email);
+
 
         $options = $mailHash.'?s='.$size.'&r=G&d=404';
         $gravatar=$this->getGravatarStatusOnline($options);
@@ -893,21 +897,21 @@ class OGC
                 array(
                   'email' => $email,
                   'hash' => $mailHash,
-                  'optimized' => 0,
+                  'optimized' => '0',
                   'size' => $size,
                   'ext' => $gravatar->ext,
                   'lastCheck' => $lastCheck,
                   'lastModified' => $gravatar->lastModified,
-                  'def' => 0
+                  'def' => '0'
                 ),
-                array('%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d')
+                array('%s', '%s', '%s', '%d', '%s', '%d', '%d', '%s')
             );
 
             if (!$result) {
                 return $this->tryDefaultAvatar($source, $size);
             }
 
-            $b35Id=base_convert($this->getIdByEmail($email, $size), 10, 35);
+            $b35Id=base_convert($this->getIdByHashAndSize($mailHash, $size), 10, 35);
             if (!$b35Id) {
                 return $this->tryDefaultAvatar($source, $size);
             }
@@ -937,14 +941,14 @@ class OGC
                 array(
                   'email' => $email,
                   'hash' => $mailHash,
-                  'optimized' => 0,
+                  'optimized' => '0',
                   'size' => $size,
                   'ext' => $this->customAvatarExt,
                   'lastCheck' => $lastCheck,
                   'lastModified' => 0,
-                  'def' => 1
+                  'def' => '1'
                 ),
-                  array('%s', '%s', '%d', '%d', '%s', '%d', '%d', '%d')
+                  array('%s', '%s', '%s', '%d', '%s', '%d', '%d', '%s')
                 );
 
                 if (!$result) {
@@ -952,7 +956,7 @@ class OGC
                 }
                 $allAvatarsHaveTheSameDate = $this->allAvatarsHaveTheSameModifiedDate($mailHash);
                 if (!$allAvatarsHaveTheSameDate) {
-                    $wpdb->query("UPDATE `{$this->cacheTableName}` SET `optimized`=0, `lastCheck`={$lastCheck}, `def`=1, `ext`='{$this->customAvatarExt}', `lastModified`=0 WHERE `hash`='{$mailHash}'");
+                    $wpdb->query("UPDATE `{$this->cacheTableName}` SET `optimized`='0', `lastCheck`={$lastCheck}, `def`='1', `ext`='{$this->customAvatarExt}', `lastModified`=0 WHERE `hash`='{$mailHash}'");
                 }
                 return $avatarTag;
             } else {
@@ -975,10 +979,10 @@ class OGC
         $sql = $wpdb->prepare("SELECT count(id) as num FROM `{$this->cacheTableName}`");
         $total = $wpdb->get_results($sql, OBJECT);
 
-        $sql = $wpdb->prepare("SELECT count( DISTINCT(hash) ) as num FROM `{$this->cacheTableName}` WHERE def=1 ");
+        $sql = $wpdb->prepare("SELECT count( DISTINCT(hash) ) as num FROM `{$this->cacheTableName}` WHERE def='1' ");
         $default = $wpdb->get_results($sql, OBJECT);
 
-        $sql = $wpdb->prepare("SELECT count( DISTINCT(hash) ) as num FROM `{$this->cacheTableName}` WHERE def=0 ");
+        $sql = $wpdb->prepare("SELECT count( DISTINCT(hash) ) as num FROM `{$this->cacheTableName}` WHERE def='0' ");
         $custom = $wpdb->get_results($sql, OBJECT);
 
         $sql = "SELECT DISTINCT(`size`) FROM `{$this->cacheTableName}`";
