@@ -679,14 +679,11 @@ class OGC
     public function optimizeCache()
     {
         global $wpdb;
-        file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - "." optimizeCache1\n", FILE_APPEND);
         $sql = "SELECT `id`, `size`, `ext`  FROM `{$this->cacheTableName}` WHERE (optimized='0' AND def='0') ORDER BY id LIMIT {$this->maxUpdateEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
-        file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode($results)." Necessita atualisar2\n", FILE_APPEND);
         if ($results) {
             foreach ($results as $gravatar) {
                 $b35Id=base_convert($gravatar -> id, 10, 35);
-                file_put_contents(ABSPATH."/cache/avatar/test.txt", json_encode(ABSPATH.$this->cacheDirectory.$b35Id.'-'.$gravatar ->size.'.'.$gravatar -> ext)." Necessita atualisar\n", FILE_APPEND);
                 if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")) {
                     continue;
                 }
