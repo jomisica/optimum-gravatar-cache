@@ -97,9 +97,7 @@ class OGC
     public function schedules($schedules)
     {
         $schedules["OGC_job"] = array(
-            // 'interval' => $this->searchExpiredTime*60*60,
-            'interval' => 60,
-
+            'interval' => $this->searchExpiredTime*60*60,
             'display' => 'OGC job'
           );
         return $schedules;
@@ -681,42 +679,23 @@ class OGC
     public function optimizeCache()
     {
         global $wpdb;
-        // return;
         file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - "." optimizeCache1\n", FILE_APPEND);
         $sql = "SELECT `id`, `size`, `ext`  FROM `{$this->cacheTableName}` WHERE (optimized='0' AND def='0') ORDER BY id LIMIT {$this->maxUpdateEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
         file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode($results)." Necessita atualisar2\n", FILE_APPEND);
         if ($results) {
             foreach ($results as $gravatar) {
-                // $b35Id=dechex($gravatar -> id);
                 $b35Id=base_convert($gravatar -> id, 10, 35);
-
-                // file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode($gravatar)." Necessita atualisar3\n", FILE_APPEND);
                 file_put_contents(ABSPATH."/cache/avatar/test.txt", json_encode(ABSPATH.$this->cacheDirectory.$b35Id.'-'.$gravatar ->size.'.'.$gravatar -> ext)." Necessita atualisar\n", FILE_APPEND);
-                // if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}-{$gravatar ->size}.{$gravatar -> ext}")) {
-                  if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")) {
-
-                    // file_put_contents(ABSPATH."/cache/avatar/test.txt", json_encode($gravatar)." Necessita atualisar\n", FILE_APPEND);
-                    // file_put_contents(ABSPATH."/cache/avatar/test.txt", json_encode(ABSPATH.$this->cacheDirectory.$b35Id.'-'.$gravatar ->size.'.'.$gravatar -> ext)." Necessita atualisar\n", FILE_APPEND);
+                if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")) {
                     continue;
-                  }
-                // file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode($gravatar)." Necessita atualisar4\n", FILE_APPEND);
-                // $options=site_url()."/{$this->cacheDirectory}{$b35Id}-{$gravatar -> size}.{$gravatar -> ext}";
-                // $options=site_url()."/{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}";
-                $options=site_url()."/{$this->cacheDirectory}11p.jpg";
-
-                file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode($options)."\n\n", FILE_APPEND);
-
+                }
+                $options=site_url()."/{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}";
                 $optimizedGravatarRequest=$this->sendResmushRequest($options);
-                file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode($optimizedGravatarRequest)."- optimizeCache5\n\n", FILE_APPEND);
-
                 if (!$optimizedGravatarRequest->error) {
                     $optimizedGravatar=$this->getOptimizedGravatar($optimizedGravatarRequest->optimizedURL);
                     if ($optimizedGravatar->status == 200) {
-                        file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode($optimizedGravatar->status)."- optimizeCache6\n\n", FILE_APPEND);
                         if (file_put_contents(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}", $optimizedGravatar->content)) {
-                            file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")."- optimizeCache7\n\n", FILE_APPEND);
-
                             $wpdb->query("UPDATE `{$this->cacheTableName}` SET optimized='1' WHERE id={$gravatar->id}");
                         }
                     }
