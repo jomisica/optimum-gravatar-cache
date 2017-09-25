@@ -448,14 +448,17 @@ class OGC
 				  `email` varchar(255) NOT NULL,
 				  `hash` char(32) NOT NULL,
 				  `optimized` enum('0','1') NOT NULL,
-				  `size` smallint(5) UNSIGNED NOT NULL,
+				  `size` int(10) UNSIGNED NOT NULL,
 				  `ext` enum('svg','jpg','png','gif') NOT NULL,
 				  `lastCheck` int(10) UNSIGNED NOT NULL,
 				  `lastModified` int(10) UNSIGNED NOT NULL,
 				  `def` enum('0','1') NOT NULL,
           PRIMARY KEY (`id`),
-          KEY `hash` (`hash`),
-          KEY `size` (`size`)
+          UNIQUE KEY `unicSize` (`hash`,`size`),
+          KEY `optimizedAvatar` (`optimized`,`def`),
+          KEY `getIdByHashAndSize` (`hash`,`size`) USING BTREE,
+          KEY `DistinctDefault` (`def`) USING BTREE,
+          KEY `lastCheck` (`lastCheck`)
 				)");
 
         $resolved=get_option('OGC_resolved');
@@ -591,9 +594,7 @@ class OGC
         if (!flock($fp, LOCK_EX|LOCK_NB)) {
             return;
         }
-
         $time=time()-$this->expiryTime * 86400;//86400 1 day
-        $sql = "SELECT DISTINCT(`hash`), `def`, `lastModified` FROM `{$this->cacheTableName}` WHERE lastCheck < {$time} ORDER BY `lastCheck` ASC LIMIT {$this->maxUpdateEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
         if ($results) {
             foreach ($results as $user) {
@@ -679,6 +680,7 @@ class OGC
     public function optimizeCache()
     {
         global $wpdb;
+        // return;
         $sql = "SELECT `id`, `size`, `ext`  FROM `{$this->cacheTableName}` WHERE (optimized='0' AND def='0') ORDER BY id LIMIT {$this->maxUpdateEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
         if ($results) {
@@ -687,7 +689,7 @@ class OGC
                 if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")) {
                     continue;
                 }
-                $options=site_url()."/{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}";
+                $options=site_url()."/{$this->cacheDirectory}11p.jpg";
                 $optimizedGravatarRequest=$this->sendResmushRequest($options);
                 if (!$optimizedGravatarRequest->error) {
                     $optimizedGravatar=$this->getOptimizedGravatar($optimizedGravatarRequest->optimizedURL);
@@ -857,6 +859,7 @@ class OGC
         $lastCheck = time();
         $mailHash=md5($email);
 
+        // EXPLAIN SELECT * FROM `wp_optimum_gravatar_cache` where (optimized='1' AND def='0')
         $sql = $wpdb->prepare("SELECT `id`, `hash`,`ext`,`def` FROM `{$this->cacheTableName}` WHERE `hash` = %s AND `size` = %d LIMIT 1", $mailHash, $size);
         $results = $wpdb->get_results($sql, OBJECT);
 
