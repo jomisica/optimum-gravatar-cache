@@ -453,9 +453,9 @@ class OGC
 				  `lastCheck` int(11) NOT NULL,
 				  `lastModified` int(11) NOT NULL,
 				  `def` enum('0','1') NOT NULL,
-          ADD PRIMARY KEY (`id`),
-          ADD KEY `hash` (`hash`),
-          ADD KEY `size` (`size`)
+          PRIMARY KEY (`id`),
+          KEY `hash` (`hash`),
+          KEY `size` (`size`)
 				)");
 
         $resolved=get_option('OGC_resolved');
