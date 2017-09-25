@@ -97,7 +97,9 @@ class OGC
     public function schedules($schedules)
     {
         $schedules["OGC_job"] = array(
-            'interval' => $this->searchExpiredTime*60*60,
+            // 'interval' => $this->searchExpiredTime*60*60,
+            'interval' => 60,
+
             'display' => 'OGC job'
           );
         return $schedules;
@@ -448,7 +450,7 @@ class OGC
 				  `email` varchar(255) NOT NULL,
 				  `hash` char(32) NOT NULL,
 				  `optimized` enum('0','1') NOT NULL,
-				  `size` int(10) UNSIGNED NOT NULL,
+				  `size` smallint(5) UNSIGNED NOT NULL,
 				  `ext` enum('svg','jpg','png','gif') NOT NULL,
 				  `lastCheck` int(10) UNSIGNED NOT NULL,
 				  `lastModified` int(10) UNSIGNED NOT NULL,
@@ -689,7 +691,7 @@ class OGC
                 if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")) {
                     continue;
                 }
-                $options=site_url()."/{$this->cacheDirectory}11p.jpg";
+                $options=site_url()."/{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}";
                 $optimizedGravatarRequest=$this->sendResmushRequest($options);
                 if (!$optimizedGravatarRequest->error) {
                     $optimizedGravatar=$this->getOptimizedGravatar($optimizedGravatarRequest->optimizedURL);
