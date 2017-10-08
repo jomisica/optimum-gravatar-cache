@@ -6,6 +6,7 @@ if (! defined('ABSPATH')) {
 ?>
 
 <form method="post" class="gravatar-cache-form" enctype="multipart/form-data">
+  <input type="hidden" name="OGC_options[optimization]" value="1"/>
   <table class="widefat fixed">
     <tr valign="top">
       <th class="column-columnname column-primary" scope="row"><label for="wp_cache_status"><?php _e('Optimize avatars', 'OGC'); ?></label></th>
@@ -18,6 +19,19 @@ if (! defined('ABSPATH')) {
     <tr valign="top">
       <td colspan="2" class="description">
         <?php _e('The optimization of avatars is done through an online service "resmush.it". This plugin needs to communicate with this service in order to optimize the avatars. It is not mandatory to use the optimized avatars. However when optimizing the avatars these will be loaded faster by the site visitor and provide a better experience.', 'OGC'); ?>
+      </td>
+    </tr>
+    <tr valign="top">
+      <th class="column-columnname column-primary" scope="row">
+        <?php _e('How many avatars to optimize each time', 'OGC'); ?>
+      </th>
+      <td>
+        <label><input type="text" name="OGC_options[maxOptimizeEachTime]" value="<?php echo $this->maxOptimizeEachTime; ?>" size="2"/></label>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td colspan="2" class="description">
+        <?php _e('This option allows you to specify how many avatars will be optimized each time. This option is important, because if the number is too high, it can consume lots of resources. A good setting will depend on the number of avatars that are cached as well as the server resources. Try it out, starting with a small number.', 'OGC'); ?>
       </td>
     </tr>
   </table>

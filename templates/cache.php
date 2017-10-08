@@ -6,7 +6,8 @@ if (! defined('ABSPATH')) {
 ?>
 
 <form method="post" class="gravatar-cache-form">
-  <table class="widefat fixed">
+  <input type="hidden" name="OGC_options[cache]" value="1"/>
+  <table class="wp-list-table widefat fixed">
     <tr valign="top">
       <th class="column-columnname column-primary" scope="row">
         <?php _e('Caching', 'OGC'); ?>
@@ -51,20 +52,20 @@ if (! defined('ABSPATH')) {
     </tr>
     <tr valign="top">
       <th class="column-columnname column-primary" scope="row">
-        <?php _e('Search for outdated gravatars every', 'OGC'); ?>
+        <?php _e('Search for outdated avatars every', 'OGC'); ?>
       </th>
       <td>
-        <label><input type="text" name="OGC_options[searchExpiredTime]" value="<?php echo $this->searchExpiredTime; ?>" size="2"/> <?php $this->searchExpiredTime <2 ? _e('hour', 'OGC') : _e('hours', 'OGC'); ?></label>
+        <label><input type="text" name="OGC_options[searchExpiredTime]" value="<?php echo $this->searchExpiredTime; ?>" size="2"/> <?php $this->searchExpiredTime <2 ? _e('minute', 'OGC') : _e('minutes', 'OGC'); ?></label>
       </td>
     </tr>
     <tr valign="top">
       <td colspan="2" class="description">
-        <?php _e('This option allows you to specify an interval at times when a cache scan is performed for outdated avatars. This check is made in the background by WordPress cron. This option accepts an integer value starting at 1.', 'OGC'); ?>
+        <?php _e('This option allows you to specify an interval in minutes in which it is checked whether users have updated their gravatar. This check is made in the background by WordPress cron. This option accepts an integer value starting at 1.', 'OGC'); ?>
       </td>
     </tr>
     <tr valign="top">
       <th class="column-columnname column-primary" scope="row">
-        <?php _e('How many gravatars to upgrade or optimize each time', 'OGC'); ?>
+        <?php _e('How many users check at a time', 'OGC'); ?>
       </th>
       <td>
         <label><input type="text" name="OGC_options[maxUpdateEachTime]" value="<?php echo $this->maxUpdateEachTime; ?>" size="2"/></label>
@@ -72,7 +73,33 @@ if (! defined('ABSPATH')) {
     </tr>
     <tr valign="top">
       <td colspan="2" class="description">
-        <?php _e('This option allows you to specify how many avatars will be updated and / or optimized at a time. This option is important because if the number is too high, it may consume many resources. Good configuration will depend on the number of avatars that are cached as well as the server resources. Try experimenting, starting with a small number.', 'OGC'); ?>
+        <?php _e('This option allows you to specify how many users should be scanned to verify that your gravatar has changed. This option is important, because if the number is too high, it can consume lots of resources. A good setup will depend on the number of avatars that are cached as well as the server resources. Try it out, starting with a small number.', 'OGC'); ?>
+      </td>
+    </tr>
+    <tr valign="top">
+      <th class="column-columnname column-primary" scope="row"><label for="wp_cache_status"><?php _e('In learning mode', 'OGC'); ?></label></th>
+      <td>
+        <fieldset>
+          <label><input type='checkbox' name='OGC_options[learningMode]' value='1' <?php checked(1, $this->learningMode); ?>></label><br />
+        </fieldset>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td colspan="2" class="description">
+        <?php _e('When the learning mode option is enabled the plugin only captures the sizes of the avatars used on your site. This will reduce the bandwidth used in communication with gravatar.com. The processing of the avatars will be faster because we have in advance the captured sizes. Leave this option active for a while, and visit your site wherever avatars appear to speed up the process of collecting sizes.', 'OGC'); ?>
+      </td>
+    </tr>
+    <tr valign="top">
+      <th class="column-columnname column-primary" scope="row">
+        <?php _e('Avatars sizes used', 'OGC'); ?>
+      </th>
+      <td>
+        <label><input type="text" name="OGC_options[avatarUsedSizes]" value="<?php echo implode(", ", $this->avatarUsedSizes); ?>"/></label>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td colspan="2" class="description">
+        <?php _e('This field allows you to add avatars sizes used on your site and contains a list of used comma-separated sizes. If you know all the sizes used, you do not need to activate the learning mode. However, this field will always be updated if a new size is used.', 'OGC'); ?>
       </td>
     </tr>
   </table>
