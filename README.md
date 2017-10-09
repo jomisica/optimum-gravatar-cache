@@ -61,18 +61,18 @@ $ rm master.zip
 ## Settings
 Below we can see the plugin configuration pages.
 
-![Settings ScreenShot](media/cache.png?raw=true "Settings ScreenShot")
+![Settings ScreenShot](assets/screenshot-1.png?raw=true "Settings ScreenShot")
 
-![Settings ScreenShot](media/default-avatar.png?raw=true "Settings ScreenShot")
+![Settings ScreenShot](assets/screenshot-2.png?raw=true "Settings ScreenShot")
 
-![Settings ScreenShot](media/optimization.png?raw=true "Settings ScreenShot")
+![Settings ScreenShot](assets/screenshot-3.png?raw=true "Settings ScreenShot")
 
-![Settings ScreenShot](media/stats.png?raw=true "Settings ScreenShot")
+![Settings ScreenShot](assets/screenshot-4.png?raw=true "Settings ScreenShot")
 
 ## Differences using and not using the plugin
 Below we can see the ScreenShot that shows the difference of files loaded using the plugin and when it is not being used.
 
-![Differences using and not using the plugin](media/compare.png?raw=true "Differences using and not using the plugin")
+![Differences using and not using the plugin](media/screenshot-5.png?raw=true "Differences using and not using the plugin")
 
 This test was done in an actual article of my blog, you can confirm by yourselves in the following link.
 
