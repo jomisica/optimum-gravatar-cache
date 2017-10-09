@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 02:10+0100\n"
+"POT-Creation-Date: 2017-10-09 15:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,209 +17,209 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: optimum-gravatar-cache.php:422
+#: optimum-gravatar-cache.php:429
 msgid ""
 "<b>How many avatars to optimize each time:</b> This option accepts an "
 "integer value from 1."
 msgstr ""
 
-#: optimum-gravatar-cache.php:414
+#: optimum-gravatar-cache.php:421
 msgid ""
 "<b>How many users check at a time:</b> This option accepts an integer value "
 "from 1."
 msgstr ""
 
-#: optimum-gravatar-cache.php:398
+#: optimum-gravatar-cache.php:405
 msgid ""
 "<b>Refresh gravatars cache every:</b> This option accepts an integer value "
 "from 1."
 msgstr ""
 
-#: optimum-gravatar-cache.php:406
+#: optimum-gravatar-cache.php:413
 msgid ""
 "<b>Search for outdated avatars every:</b> This option accepts an integer "
 "value from 1."
 msgstr ""
 
-#: templates/cache.php:29
+#: admin/templates/cache.php:30
 msgid "Avatars cache directory"
 msgstr ""
 
-#: templates/stats.php:64
+#: admin/templates/stats.php:64
 msgid "Avatars on disk"
 msgstr ""
 
-#: templates/cache.php:94
+#: admin/templates/cache.php:95
 msgid "Avatars sizes used"
 msgstr ""
 
-#: optimum-gravatar-cache.php:1185
+#: optimum-gravatar-cache.php:1180
 msgid "Cache"
 msgstr ""
 
-#: templates/stats.php:32
+#: admin/templates/stats.php:32
 msgid "Cached avatars"
 msgstr ""
 
-#: templates/cache.php:13 templates/stats.php:11
+#: admin/templates/cache.php:14 admin/templates/stats.php:11
 msgid "Caching"
 msgstr ""
 
-#: templates/cache.php:18
+#: admin/templates/cache.php:19
 msgid "Caching Off"
 msgstr ""
 
-#: templates/cache.php:17
+#: admin/templates/cache.php:18
 msgid "Caching On"
 msgstr ""
 
-#: templates/cache.php:108
+#: admin/templates/cache.php:109
 msgid "Clear Cache"
 msgstr ""
 
-#: templates/cache.php:121 templates/stats.php:84 templates/optimization.php:48
-#: templates/default-avatar.php:60
+#: admin/templates/cache.php:122 admin/templates/stats.php:84
+#: admin/templates/optimization.php:49 admin/templates/default-avatar.php:62
 msgid "Contact Us"
 msgstr ""
 
-#: optimum-gravatar-cache.php:358 optimum-gravatar-cache.php:374
+#: optimum-gravatar-cache.php:365 optimum-gravatar-cache.php:381
 #, php-format
 msgid ""
 "Could not create cache directory \"%s\". Please set read/write/execute (755) "
 "permissions for \"%s\" and/or correct owner."
 msgstr ""
 
-#: optimum-gravatar-cache.php:1246
+#: optimum-gravatar-cache.php:1241
 #, php-format
 msgid "Could not delete file \"%s\" check permissions."
 msgstr ""
 
-#: optimum-gravatar-cache.php:276 optimum-gravatar-cache.php:285
+#: optimum-gravatar-cache.php:283 optimum-gravatar-cache.php:292
 msgid "Could not save avatar."
 msgstr ""
 
-#: optimum-gravatar-cache.php:1185 templates/default-avatar.php:12
+#: optimum-gravatar-cache.php:1180 admin/templates/default-avatar.php:14
 msgid "Default avatar"
 msgstr ""
 
-#: optimum-gravatar-cache.php:107
+#: optimum-gravatar-cache.php:111
 msgid "Discussion Group"
 msgstr ""
 
-#: templates/cache.php:131 templates/stats.php:94 templates/optimization.php:58
-#: templates/default-avatar.php:70
+#: admin/templates/cache.php:132 admin/templates/stats.php:94
+#: admin/templates/optimization.php:59 admin/templates/default-avatar.php:72
 msgid "E-mail"
 msgstr ""
 
-#: optimum-gravatar-cache.php:328
+#: optimum-gravatar-cache.php:335
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: optimum-gravatar-cache.php:335
+#: optimum-gravatar-cache.php:342
 msgid "File upload stopped by extension."
 msgstr ""
 
-#: optimum-gravatar-cache.php:108
+#: optimum-gravatar-cache.php:112
 msgid "GitHub Project"
 msgstr ""
 
-#: templates/stats.php:56
+#: admin/templates/stats.php:56
 msgid "How many avatars have been resolved"
 msgstr ""
 
-#: templates/optimization.php:26
+#: admin/templates/optimization.php:27
 msgid "How many avatars to optimize each time"
 msgstr ""
 
-#: templates/cache.php:68
+#: admin/templates/cache.php:69
 msgid "How many users check at a time"
 msgstr ""
 
-#: templates/stats.php:48
+#: admin/templates/stats.php:48
 msgid "How many users do not have a custom avatar"
 msgstr ""
 
-#: templates/stats.php:40
+#: admin/templates/stats.php:40
 msgid "How many users use a custom avatar"
 msgstr ""
 
-#: templates/cache.php:80
+#: admin/templates/cache.php:81
 msgid "In learning mode"
 msgstr ""
 
-#: templates/stats.php:24
+#: admin/templates/stats.php:24
 msgid "MimeTypes Used"
 msgstr ""
 
-#: optimum-gravatar-cache.php:321
+#: optimum-gravatar-cache.php:328
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: optimum-gravatar-cache.php:1185
+#: optimum-gravatar-cache.php:1180
 msgid "Optimization"
 msgstr ""
 
-#: templates/optimization.php:12
+#: admin/templates/optimization.php:13
 msgid "Optimize avatars"
 msgstr ""
 
-#: optimum-gravatar-cache.php:366 optimum-gravatar-cache.php:382
+#: optimum-gravatar-cache.php:373 optimum-gravatar-cache.php:389
 #, php-format
 msgid ""
 "Please set read/write/execute (755) permissions for \"%s\" and/or correct "
 "owner."
 msgstr ""
 
-#: templates/cache.php:42
+#: admin/templates/cache.php:43
 msgid "Refresh gravatars cache every"
 msgstr ""
 
-#: templates/default-avatar.php:37
+#: admin/templates/default-avatar.php:39
 msgid "Reset avatar by default"
 msgstr ""
 
-#: templates/default-avatar.php:46
+#: admin/templates/default-avatar.php:48
 msgid ""
 "Resetting the avatar by default allows you to use the avatar provided by the "
 "plugin when installed. This way removing any previous customization."
 msgstr ""
 
-#: templates/cache.php:107 templates/optimization.php:39
-#: templates/default-avatar.php:51
+#: admin/templates/cache.php:108 admin/templates/optimization.php:40
+#: admin/templates/default-avatar.php:53
 msgid "Save Changes"
 msgstr ""
 
-#: templates/cache.php:55
+#: admin/templates/cache.php:56
 msgid "Search for outdated avatars every"
 msgstr ""
 
-#: optimum-gravatar-cache.php:98
+#: optimum-gravatar-cache.php:102
 msgid "Settings"
 msgstr ""
 
-#: templates/stats.php:16
+#: admin/templates/stats.php:16
 msgid "Sizes used"
 msgstr ""
 
-#: templates/stats.php:71
+#: admin/templates/stats.php:71
 msgid "Space used by avatars"
 msgstr ""
 
-#: optimum-gravatar-cache.php:1185
+#: optimum-gravatar-cache.php:1180
 msgid "Stats"
 msgstr ""
 
-#: templates/default-avatar.php:20
+#: admin/templates/default-avatar.php:22
 msgid ""
 "The default avatar is used whenever the user does not have a custom "
 "gravatar. It should be configured with an image that fits your site."
 msgstr ""
 
-#: optimum-gravatar-cache.php:292
+#: optimum-gravatar-cache.php:299
 msgid "The file type is not supported."
 msgstr ""
 
-#: templates/optimization.php:21
+#: admin/templates/optimization.php:22
 msgid ""
 "The optimization of avatars is done through an online service \"resmush.it"
 "\". This plugin needs to communicate with this service in order to optimize "
@@ -228,28 +228,28 @@ msgid ""
 "provide a better experience."
 msgstr ""
 
-#: optimum-gravatar-cache.php:541
+#: optimum-gravatar-cache.php:548
 msgid ""
 "The plugin has been activated but needs to be configured to work. Enter the "
 "configuration page through the menu. You need at least specify the directory "
 "where the gravatars will be saved."
 msgstr ""
 
-#: optimum-gravatar-cache.php:307
+#: optimum-gravatar-cache.php:314
 msgid ""
 "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
 "the HTML form."
 msgstr ""
 
-#: optimum-gravatar-cache.php:300
+#: optimum-gravatar-cache.php:307
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr ""
 
-#: optimum-gravatar-cache.php:314
+#: optimum-gravatar-cache.php:321
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: templates/cache.php:102
+#: admin/templates/cache.php:103
 msgid ""
 "This field allows you to add avatars sizes used on your site and contains a "
 "list of used comma-separated sizes. If you know all the sizes used, you do "
@@ -257,7 +257,7 @@ msgid ""
 "updated if a new size is used."
 msgstr ""
 
-#: templates/default-avatar.php:33
+#: admin/templates/default-avatar.php:35
 msgid ""
 "This image will be used as the default avatar. Accepts the following image "
 "types (.SVG, .PNG, .JPG, .GIF). The image should have the minimum dimensions "
@@ -265,13 +265,13 @@ msgid ""
 "it is resized. Except in case of type .SVG."
 msgstr ""
 
-#: templates/cache.php:24
+#: admin/templates/cache.php:25
 msgid ""
 "This option allows you to enable or disable the Gravatars cache locally. It "
 "has the same effect as disabling the plugin."
 msgstr ""
 
-#: templates/cache.php:63
+#: admin/templates/cache.php:64
 msgid ""
 "This option allows you to specify an interval in minutes in which it is "
 "checked whether users have updated their gravatar. This check is made in the "
@@ -279,7 +279,7 @@ msgid ""
 "at 1."
 msgstr ""
 
-#: templates/optimization.php:34
+#: admin/templates/optimization.php:35
 msgid ""
 "This option allows you to specify how many avatars will be optimized each "
 "time. This option is important, because if the number is too high, it can "
@@ -288,7 +288,7 @@ msgid ""
 "starting with a small number."
 msgstr ""
 
-#: templates/cache.php:50
+#: admin/templates/cache.php:51
 msgid ""
 "This option allows you to specify how many days the avatars are cached. "
 "After these days an avatar update will be made, if it has been modified by "
@@ -296,7 +296,7 @@ msgid ""
 "1."
 msgstr ""
 
-#: templates/cache.php:76
+#: admin/templates/cache.php:77
 msgid ""
 "This option allows you to specify how many users should be scanned to verify "
 "that your gravatar has changed. This option is important, because if the "
@@ -305,34 +305,34 @@ msgid ""
 "resources. Try it out, starting with a small number."
 msgstr ""
 
-#: templates/cache.php:37
+#: admin/templates/cache.php:38
 msgid ""
 "This option allows you to specify where cached files will be saved. Avatar "
 "images will be stored in this directory."
 msgstr ""
 
-#: optimum-gravatar-cache.php:1226
+#: optimum-gravatar-cache.php:1221
 msgid "Unable to clear data from the table."
 msgstr ""
 
-#: optimum-gravatar-cache.php:1234
+#: optimum-gravatar-cache.php:1229
 msgid "Unable to reset AUTO_INDEX from the table."
 msgstr ""
 
-#: optimum-gravatar-cache.php:342
+#: optimum-gravatar-cache.php:349
 msgid "Unknown upload error."
 msgstr ""
 
-#: templates/default-avatar.php:25
+#: admin/templates/default-avatar.php:27
 msgid "Upload custom image"
 msgstr ""
 
-#: templates/cache.php:126 templates/stats.php:89 templates/optimization.php:53
-#: templates/default-avatar.php:65
+#: admin/templates/cache.php:127 admin/templates/stats.php:89
+#: admin/templates/optimization.php:54 admin/templates/default-avatar.php:67
 msgid "WebSite"
 msgstr ""
 
-#: templates/cache.php:89
+#: admin/templates/cache.php:90
 msgid ""
 "When the learning mode option is enabled the plugin only captures the sizes "
 "of the avatars used on your site. This will reduce the bandwidth used in "
@@ -342,26 +342,26 @@ msgid ""
 "the process of collecting sizes."
 msgstr ""
 
-#: templates/cache.php:45
+#: admin/templates/cache.php:46
 msgid "day"
 msgstr ""
 
-#: templates/cache.php:45
+#: admin/templates/cache.php:46
 msgid "days"
 msgstr ""
 
-#: templates/cache.php:110
+#: admin/templates/cache.php:111
 msgid "image"
 msgstr ""
 
-#: templates/cache.php:110
+#: admin/templates/cache.php:111
 msgid "images"
 msgstr ""
 
-#: templates/cache.php:58
+#: admin/templates/cache.php:59
 msgid "minute"
 msgstr ""
 
-#: templates/cache.php:58
+#: admin/templates/cache.php:59
 msgid "minutes"
 msgstr ""
