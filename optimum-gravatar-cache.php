@@ -1,11 +1,15 @@
 <?php
 /*
 Plugin Name: Optimum Gravatar Cache
+Plugin URI:   https://www.ncdc.pt/groups/wordpress-optimum-gravatar-cache/
+Version: 0.9.1
 Author: José Miguel Silva Caldeira
-Version: 0.9.2
+License:      GPL3
+License URI:  https://www.gnu.org/licenses/gpl-3.0.html
 Description: It cache the gravatars locally, reducing the total number of requests per post. This will speed up the loading of the site and consequently improve the user experience.
 Author URI: https://www.ncdc.pt/members/admin
 Text Domain: OGC
+Domain Path:  /languages
 */
 
 if (!defined('ABSPATH')) {
