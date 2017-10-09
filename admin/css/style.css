@@ -1,0 +1,12 @@
+div.wrap{
+  overflow: auto !important;
+}
+
+table.widefat th.column-primary{
+  font-weight: bold;
+  vertical-align: middle;
+}
+table.widefat td.description{
+   white-space: normal;
+     vertical-align: middle;
+}
