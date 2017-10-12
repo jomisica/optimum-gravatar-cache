@@ -2,7 +2,7 @@
 /*
 Plugin Name: Optimum Gravatar Cache
 Plugin URI:   https://www.ncdc.pt/groups/wordpress-optimum-gravatar-cache/
-Version: 0.9.1
+Version: 1.0
 Author: José Miguel Silva Caldeira
 License:      GPL3
 License URI:  https://www.gnu.org/licenses/gpl-3.0.html
@@ -100,8 +100,8 @@ class OGC
     {
         if (strpos(__FILE__, dirname($file)) !== false) {
             $newLinks = array(
-                    'discussionGroup' => '<a href="//www.ncdc.pt/groups/wordpress-optimum-gravatar-cache" target="_blank">'.__('Discussion Group', 'OGC').'</a>',
-                    'gitHub' => '<a href="//github.com/jomisica/optimum-gravatar-cache" target="_blank">'.__('GitHub Project', 'OGC').'</a>'
+                    'discussionGroup' => '<a href="https://www.ncdc.pt/groups/wordpress-optimum-gravatar-cache" target="_blank">'.__('Discussion Group', 'OGC').'</a>',
+                    'gitHub' => '<a href="https://github.com/jomisica/optimum-gravatar-cache" target="_blank">'.__('GitHub Project', 'OGC').'</a>'
                     );
             $links = array_merge($links, $newLinks);
         }
@@ -601,11 +601,13 @@ class OGC
     public function updateAndResizeAllSizes($hash)
     {
         global $wpdb;
+
         $sql = "SELECT DISTINCT(`size`), id FROM `{$this->cacheTableName}` WHERE `hash` = '$hash' ORDER BY `size` DESC";
         $sizeResults = $wpdb->get_results($sql, OBJECT);
         $maxValue = max($this->avatarUsedSizes);
         $options = "{$hash}?s={$maxValue}&r={$this->avatarRating}&d=404";
         $newGravatar=$this->getGravatarOnline($options);
+
         if ($newGravatar->status == 200) {
             file_put_contents(ABSPATH."{$this->cacheDirectory}tmp/{$hash}.{$newGravatar->ext}", $newGravatar->content);
             $img = wp_get_image_editor(ABSPATH."{$this->cacheDirectory}tmp/{$hash}.{$newGravatar->ext}");
@@ -642,8 +644,6 @@ class OGC
         if (!flock($fp, LOCK_EX|LOCK_NB)) {
             return;
         }
-        file_put_contents(ABSPATH."cache/avatar/test.txt", json_encode(date("D M j G:i:s"))." -- ". __LINE__." -- ".__FUNCTION__." \n", FILE_APPEND);
-
         $time=time()-$this->expiryTime * 86400;//86400 1 day
         $sql = "SELECT DISTINCT(`hash`), `def`, `lastModified`, `lastCheck` FROM `{$this->cacheTableName}` WHERE lastCheck < {$time} ORDER BY `lastCheck` ASC LIMIT {$this->maxUpdateEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
@@ -678,27 +678,20 @@ class OGC
     public function optimizeCache()
     {
         global $wpdb;
-        file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - "." optimizeCache1\n", FILE_APPEND);
         $sql = "SELECT `id`, `size`, `ext`  FROM `{$this->cacheTableName}` WHERE (optimized='0' AND def='0') ORDER BY lastCheck DESC LIMIT {$this->maxOptimizeEachTime}";
         $results = $wpdb->get_results($sql, OBJECT);
-        file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode($results)." Necessita atualisar2\n", FILE_APPEND);
         if ($results) {
             foreach ($results as $gravatar) {
                 $b35Id=base_convert($gravatar -> id, 10, 35);
-                file_put_contents(ABSPATH."/cache/avatar/test.txt", json_encode(ABSPATH.$this->cacheDirectory.$b35Id.'-'.$gravatar ->size.'.'.$gravatar -> ext)." Necessita atualisar\n", FILE_APPEND);
                 if (!file_exists(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")) {
                     continue;
                 }
                 $options=site_url()."/{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}";
-                file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode($options)."\n\n", FILE_APPEND);
                 $optimizedGravatarRequest=$this->sendResmushRequest($options);
-                file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode($optimizedGravatarRequest)."- optimizeCache5\n\n", FILE_APPEND);
                 if (!$optimizedGravatarRequest->error) {
                     $optimizedGravatar=$this->getOptimizedGravatar($optimizedGravatarRequest->optimizedURL);
                     if ($optimizedGravatar->status == 200) {
-                        file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode($optimizedGravatar->status)."- optimizeCache6\n\n", FILE_APPEND);
                         if (file_put_contents(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}", $optimizedGravatar->content)) {
-                            file_put_contents(ABSPATH."cache/avatar/test.txt", __LINE__." - ".json_encode(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar -> ext}")."- optimizeCache7\n\n", FILE_APPEND);
                             $wpdb->query("UPDATE `{$this->cacheTableName}` SET optimized='1' WHERE id={$gravatar->id}");
                         }
                     }
@@ -833,7 +826,6 @@ class OGC
         if ($result) {
             $sourceB35Id=base_convert($largerCached->id, 10, 35);
             $destB35Id=base_convert($this->getIdByHashAndSize($hash, $size), 10, 35);
-            file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode(ABSPATH."{$this->cacheDirectory}{$sourceB35Id}.{$largerCached->ext}")." - source - ".__FUNCTION__."\n", FILE_APPEND);
             $img = wp_get_image_editor(ABSPATH."{$this->cacheDirectory}{$sourceB35Id}.{$largerCached->ext}");
             if (! is_wp_error($img)) {
                 $resize = $img->set_quality(100);
@@ -871,7 +863,6 @@ class OGC
             $options = $hash.'?s='.$size.'&r='.$this->avatarRating.'&d=404';
             $gravatar=$this->getGravatarOnline($options);
             if ($gravatar->status == 200) {
-                file_put_contents(ABSPATH."/cache/avatar/test.txt", __LINE__." - ".json_encode(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar->ext}")." - source - ".__FUNCTION__."\n", FILE_APPEND);
                 if (file_put_contents(ABSPATH."{$this->cacheDirectory}{$b35Id}.{$gravatar->ext}", $gravatar->content)) {
                     return "<img alt src='/{$this->cacheDirectory}{$b35Id}.{$gravatar->ext}' class='avatar avatar-{$size}' width='{$size}' height='{$size}' />";
                 }
@@ -917,7 +908,6 @@ class OGC
         return false;
     }
 
-
     protected function updateAvatarUsedSizes($size)
     {
         if (!in_array($size, $this->avatarUsedSizes)) {
@@ -951,12 +941,14 @@ class OGC
               array('%s', '%s', '%s', '%d', '%s', '%d', '%d', '%s')
             );
         }
+
         return;
     }
 
     public function getCachedAvatar($source, $idOrEmail, $size, $default, $alt)
     {
         global $wpdb;
+
         if ($this->learningMode) {
             $this->updateAvatarUsedSizes($size);
             return $source;

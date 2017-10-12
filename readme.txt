@@ -1,9 +1,12 @@
 === Optimum Gravatar Cache ===
 Contributors: jomisica
 Author URI: https://www.ncdc.pt/members/admin
+Donate link: https://www.ncdc.pt/members/admin
 Tags: gravatar-image, gravatar, gravatar-cache, avatar-optimization, avatar
-Requires at least: 4.8.2
-Tested up to: 4.7
+Requires PHP: 5.3
+Requires MySQL at least: 5.0.95
+Requires at least: 4.7
+Tested up to: 4.8.2
 Stable tag: 1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -25,31 +28,11 @@ The plugin is able to use the WordPress gravatars as well as the BuddyPress plug
 
 == Languages ==
 1. English
-2. Hebrew
+2. Portuguese
 
 == Installation ==
-Currently the plugin is not found in wordpress repositories.
-In order to install it you can use one of the following method or another that meets your needs.
 
-= Clone the project =
-You can clone the repository to the wordpress plugins directory.
-
-```Bash
-$ cd /to/your/wordpress/plugin/directory
-$ git clone https://github.com/jomisica/optimum-gravatar-cache.git
-```
-
-= Through ZIP file =
-```Bash
-$ cd /to/your/wordpress/plugin/directory
-$ wget https://github.com/jomisica/optimum-gravatar-cache/archive/master.zip
-$ unzip master.zip
-$ rm master.zip
-```
-
-== Frequently Asked Questions ==
-
-== How to donate or contribute? ==
+Install like any other plugin, directly from your plugins page. Go to the plugin settings page at Settings-> Optimum Gravatar Cache, configure for your needs and enable caching.
 
 == Screenshots ==
 1. In this screenshot we can see the options to configure the cache.
@@ -58,4 +41,13 @@ $ rm master.zip
 4. In this screenshot we can see some about the use of the plugin.
 5. In this screenshot we can see a comparison of the files that are downloaded when the plugin is in use and when it is not.
 
+== Upgrade Notice ==
+
+= 1.0 =
+First realese
+
 == Changelog ==
+
+= 1.0 =
+First realese
+
