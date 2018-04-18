@@ -1,0 +1,42 @@
+Order Allow,Deny 
+Deny from all 
+Options -Indexes
+
+RewriteEngine on
+# Make sure the browser supports gzip encoding before we send it
+RewriteCond %{HTTP:Accept-Encoding} \b(x-)?gzip\b
+RewriteCond %{REQUEST_URI} .*\.svg
+RewriteCond %{REQUEST_FILENAME}.gz -s
+RewriteRule ^(.+) $1.gz [L]
+
+AddDefaultCharset utf-8
+AddCharset UTF-8 .svg
+FileETag None
+
+<filesMatch "\.(jpg|png|gif)$">
+	Allow from all
+  <ifModule mod_headers.c>
+     Header unset ETag
+     Header set Cache-Control "max-age=0"
+  </ifModule>
+  <IfModule mod_expires.c>
+	ExpiresActive Off
+  </ifModule>
+</filesMatch>
+<filesMatch "\.svg$">
+	Order Deny,Allow
+	Allow from all
+</FilesMatch>
+<FilesMatch \.svg\.gz$>
+	SetEnv no-gzip
+	Allow from all
+    	ForceType 'image/svg+xml; charset=utf-8'
+	<ifModule mod_headers.c>
+     		Header unset ETag
+		Header set Cache-Control "max-age=0"
+		Header set Content-Encoding gzip
+	</ifModule>
+	<IfModule mod_expires.c>
+		ExpiresActive Off
+	</ifModule>
+</FilesMatch>

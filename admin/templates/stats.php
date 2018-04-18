@@ -8,12 +8,12 @@ if (! defined('ABSPATH')) {
 <table class="widefat fixed" cellspacing="0" border=0 width="600">
   <thead>
     <th class="column-columnname column-primary" scope="col" colspan="2">
-      <?php _e('Caching', 'OGC'); ?>
+      <?php _e("Caching", "OGC"); ?>
     </th>
   </thead>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('Sizes used', 'OGC'); ?>
+      <?php _e("Sizes used", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $dbCacheInfo['sizes']?>
@@ -21,7 +21,7 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('MimeTypes Used', 'OGC'); ?>
+      <?php _e("MimeTypes Used", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $fileCacheInfo['typesUsed']?>
@@ -29,7 +29,7 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('Cached avatars', 'OGC'); ?>
+      <?php _e("Cached avatars", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $dbCacheInfo['total']?>
@@ -37,7 +37,7 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('How many users use a custom avatar', 'OGC'); ?>
+      <?php _e("How many users use a custom avatar", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $dbCacheInfo['custom']?>
@@ -45,7 +45,7 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('How many users do not have a custom avatar', 'OGC'); ?>
+      <?php _e("How many users do not have a custom avatar", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $dbCacheInfo['default']?>
@@ -53,7 +53,7 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('How many avatars have been resolved', 'OGC'); ?>
+      <?php _e("How many avatars have been resolved", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $this->resolved; ?>
@@ -61,14 +61,14 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('Avatars on disk', 'OGC'); ?></th>
+      <?php _e("Avatars on disk", "OGC"); ?></th>
     <td class="column-columnname">
       <?php echo $fileCacheInfo['images']?>
     </td>
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" scope="row">
-      <?php _e('Space used by avatars', 'OGC'); ?>
+      <?php _e("Space used by avatars", "OGC"); ?>
     </th>
     <td class="column-columnname">
       <?php echo $fileCacheInfo['usedSpace']?>
@@ -81,17 +81,17 @@ if (! defined('ABSPATH')) {
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary" colspan="2">
-      <?php _e('Contact Us', 'OGC'); ?>
+      <?php _e("Contact Us", "OGC"); ?>
     </th>
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary">
-      <?php _e('WebSite', 'OGC') ?>:</th>
+      <?php _e("WebSite", "OGC") ?>:</th>
     <td class="column-columnname"><a href="https://www.ncdc.pt">https://www.ncdc.pt</a></td>
   </tr>
   <tr valign="top">
     <th class="column-columnname column-primary">
-      <?php _e('E-mail', 'OGC') ?>:</th>
+      <?php _e("E-mail", "OGC") ?>:</th>
     <td class="column-columnname"><a title="Mail To miguel@ncdc.pt" href="mailto:miguel@ncdc.pt">miguel@ncdc.pt</a></td>
   </tr>
 </table>
